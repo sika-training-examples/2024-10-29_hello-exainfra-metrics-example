@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-o2
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - hello-o2.k8s.sikademo.com
+      secretName: hello-o2.k8s.sikademo.com-tls
+  rules:
+    - host: hello-o2.k8s.sikademo.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-o2
+                port:
+                  number: 80
+          - path: /metrics
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-o2
+                port:
+                  number: 8001

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-o2
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: hello-o2
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: hello-o2
+    spec:
+      containers:
+        - name: hello-o2
+          image: sikalabs/hello-world-server:o2
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8000
+            - name: metrics
+              containerPort: 8001
+          resources:
+            requests:
+              cpu: 40m
+              memory: 40Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
