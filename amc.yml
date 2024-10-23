@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: hello-o2
+  labels:
+    alertmanager: config
+spec:
+  route:
+    receiver: "null"
+    routes:
+      - receiver: 'o2'
+        matchers:
+          - name: alertname
+            regex: true
+            value: "HelloO2HighRatePerInstanceAlert|HelloO2HighRateGlobalAlert"
+  receivers:
+    - name: "null"
+    - name: 'o2'
+      webhookConfigs:
+        - url: 'http://prom2.sikademo.com:9999/am'

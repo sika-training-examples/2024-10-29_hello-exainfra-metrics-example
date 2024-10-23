@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: hello-o2
+spec:
+  jobLabel: hello-o2
+  selector:
+    matchLabels:
+      app: hello-o2
+  endpoints:
+    - port: metrics
