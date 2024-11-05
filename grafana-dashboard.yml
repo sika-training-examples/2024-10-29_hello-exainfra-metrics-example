@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: hello-o2-grafana-dashboard
+  name: hello-exainfra-grafana-dashboard
   labels:
     grafana_dashboard: "1"
 data:
-  hello-o2.json: |-
+  hello-exainfra.json: |-
     {
       "annotations": {
         "list": [
@@ -428,7 +428,7 @@ data:
         "list": []
       },
       "time": {
-        "from": "now-5m",
+        "from": "now-30m",
         "to": "now"
       },
       "timepicker": {
@@ -446,8 +446,8 @@ data:
         ]
       },
       "timezone": "",
-      "title": "Hello O2",
-      "uid": "hello-o2",
+      "title": "Hello exainfra",
+      "uid": "hello-exainfra",
       "version": 1,
       "weekStart": ""
     }

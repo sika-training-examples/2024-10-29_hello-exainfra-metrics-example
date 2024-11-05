@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-o2
+  name: hello-exainfra
 spec:
   revisionHistoryLimit: 0
   selector:
     matchLabels:
-      app: hello-o2
+      app: hello-exainfra
   replicas: 4
   template:
     metadata:
       labels:
-        app: hello-o2
+        app: hello-exainfra
     spec:
       containers:
-        - name: hello-o2
-          image: sikalabs/hello-world-server:o2
+        - name: hello-exainfra
+          image: sikalabs/hello-world-server:exainfra
           imagePullPolicy: Always
           ports:
             - name: http

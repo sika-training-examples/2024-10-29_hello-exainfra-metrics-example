@@ -1,11 +1,11 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: hello-o2
+  name: hello-exainfra
 spec:
-  jobLabel: hello-o2
+  jobLabel: hello-exainfra
   selector:
     matchLabels:
-      app: hello-o2
+      app: hello-exainfra
   endpoints:
     - port: metrics

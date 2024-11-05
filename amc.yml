@@ -1,20 +1,36 @@
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig
 metadata:
-  name: hello-o2
+  name: hello-exainfra
   labels:
     alertmanager: config
 spec:
   route:
-    receiver: "null"
+    receiver: exa-all
     routes:
-      - receiver: 'o2'
+      - receiver: exa-a
         matchers:
           - name: alertname
-            regex: true
-            value: "HelloO2HighRatePerInstanceAlert|HelloO2HighRateGlobalAlert"
+            value: "HelloExainfraHighRequestRateAlert"
+            # matchType: '='
+      - receiver: exa-b
+        matchers:
+          - name: alertname
+            value: "HelloExainfraHighGlobalRequestRateAlert"
+            # matchType: '='
   receivers:
-    - name: "null"
-    - name: 'o2'
-      webhookConfigs:
-        - url: 'http://prom2.sikademo.com:9999/am'
+    - name: exa-all
+      emailConfigs:
+        - to: exa-all@exa.com
+          sendResolved: true
+          html: '[exa-all]<br><hr><br>{{ template "email.default.html" . }}'
+    - name: exa-a
+      emailConfigs:
+        - to: exa-a@exa.com
+          sendResolved: true
+          html: '[exa-a]<br><hr><br>{{ template "email.default.html" . }}'
+    - name: exa-b
+      emailConfigs:
+        - to: exa-b@exa.com
+          sendResolved: true
+          html: '[exa-b]<br><hr><br>{{ template "email.default.html" . }}'

@@ -1,22 +1,22 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: hello-o2
+  name: hello-exainfra
 spec:
   groups:
-    - name: hello-o2.rules
+    - name: hello-exainfra.rules
       rules:
-        - alert: HelloO2HighRatePerInstanceAlert
+        - alert: HelloExainfraHighRequestRateAlert
           annotations:
             message: |
               High request rate on {{ $labels.instance }}.
-          expr: rate(hello_world_server_requests_total{namespace="hello-o2"}[2m]) > 10
+          expr: sum(rate(hello_world_server_requests_total[2m])) by (pod) > 10
           labels:
             severity: warn
-        - alert: HelloO2HighRateGlobalAlert
+        - alert: HelloExainfraHighGlobalRequestRateAlert
           annotations:
             message: |
               High request rate.
-          expr: sum(rate(hello_world_server_requests_total{namespace="hello-o2"}[2m])) > 50
+          expr: sum(rate(hello_world_server_requests_total[2m])) > 50
           labels:
             severity: warn
